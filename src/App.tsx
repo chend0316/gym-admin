@@ -4,13 +4,14 @@ import type { MenuProps } from 'antd';
 import { Layout } from './biz/HomePageLayout';
 import { Link, Outlet } from 'react-router-dom'
 import { useMenuActiveKey } from './router'
+import { Header } from './biz/Header';
 export default function App() {
   const menuActiveKey = useMenuActiveKey();
   console.log(menuActiveKey)
 
   return (
     <>
-      <Layout header={"头部"} leftMenu={
+      <Layout header={<Header />} leftMenu={
         <Menu className='h-full' items={menuItems} mode='inline' selectedKeys={[menuActiveKey]} />
       } body={<Outlet />} />
     </>
