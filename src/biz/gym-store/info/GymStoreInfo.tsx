@@ -1,19 +1,21 @@
-
-import React from 'react'
 import { Typography } from 'antd'
 import { GymStoreBasicInfo } from './GymStoreBasicInfo';
-import { GymStoreMemberLevel } from './GymStoreMemberLevel';
+import { GymStoreMemberLevelSettings } from './GymStoreMemberLevel';
+import { GymStore } from '../../../schema';
 
 const { Title } = Typography;
+
+interface GymStoreInfoProps {
+}
 
 /**
  * 门店信息
  */
-export function GymStoreInfo() {
+export function GymStoreInfo({ }: GymStoreInfoProps) {
   return (
     <div>
       <GymStoreBasicInfo />
-      <GymStoreMemberLevel />
+      <GymStoreMemberLevelSettings />
       <Title level={5}>团课等级</Title>
       <Title level={5}>教室/场地</Title>
     </div>

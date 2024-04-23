@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouteObject, useLocation } from 'react-router-dom'
-import GymStoreManagement from './pages/GymStoreManagement.tsx'
+import { GymStoreManagementPage } from './pages/GymStoreManagementPage.tsx'
 import { GymStoreInfo } from './biz/gym-store/info/GymStoreInfo.tsx'
 import { GymStoreMemberManagement } from './biz/gym-store/member/GymStoreMemberManagement.tsx'
 import { GymStoreCoachManagement } from './biz/gym-store/coach/GymStoreCoachManagement.tsx'
@@ -14,7 +14,7 @@ const routerConfig: RouteObject[] = [
     children: [
       {
         path: 'gym-store',
-        element: <GymStoreManagement />,
+        element: <GymStoreManagementPage />,
         children: [
           {
             path: 'index',

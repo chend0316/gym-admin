@@ -1,10 +1,13 @@
 import React from 'react'
 import { Button, Form, Input, Typography } from 'antd'
+import { GymStore } from '../../../schema';
+import { useGymStoreStateContext } from '../GymStoreContext';
 
 const { Title } = Typography;
 
 export function GymStoreBasicInfo() {
   const [editMode, setEditMode] = React.useState(false);
+  const { currentGymStore } = useGymStoreStateContext()
 
   return (
     <>
@@ -14,18 +17,18 @@ export function GymStoreBasicInfo() {
       </div>
       {
         editMode ? <BasicInfoEditor /> :
-          <BasicInfoViewer />
+          <BasicInfoViewer gymStore={currentGymStore} />
       }
     </>
   )
 }
 
-function BasicInfoViewer() {
+function BasicInfoViewer({ gymStore }: { gymStore: GymStore }) {
   return (
     <>
-      <div>名称：</div>
-      <div>联系电话：</div>
-      <div>地址：</div>
+      <div>名称：{gymStore.name}</div>
+      <div>联系电话：{gymStore.phone}</div>
+      <div>地址：{gymStore.address}</div>
     </>
   )
 }

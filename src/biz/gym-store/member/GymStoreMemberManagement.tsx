@@ -1,14 +1,8 @@
 import { Button, Input, Select, Space, Table, TableProps } from 'antd';
-import React from 'react'
+import { useGymStoreDispatchContext, useGymStoreStateContext } from '../GymStoreContext';
+import { GymStoreMember } from '../../../schema';
 
-interface Member {
-  id: string;
-  nickname: string;
-  name: string;
-  phone: string;
-}
-
-const columns: TableProps<Member>['columns'] = [
+const columns: TableProps<GymStoreMember>['columns'] = [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -51,20 +45,9 @@ const columns: TableProps<Member>['columns'] = [
  * 会员管理
  */
 export function GymStoreMemberManagement() {
-  const data: Member[] = [
-    {
-      id: '1',
-      nickname: 'zhangsan',
-      name: 'zhangsan',
-      phone: '18888888888',
-    },
-    {
-      id: '2',
-      nickname: 'zhangsan',
-      name: 'zhangsan',
-      phone: '18888888888',
-    }
-  ];
+  const { currentGymStore } = useGymStoreStateContext()
+  const members = currentGymStore.members;
+  const dispatch = useGymStoreDispatchContext();
 
   return (
     <div>
@@ -90,9 +73,9 @@ export function GymStoreMemberManagement() {
           </Space.Compact>
           <Button onClick={() => { }}>搜索</Button>
         </div>
-        <Button type="primary" onClick={() => { }}>新增会员</Button>
+        <Button type="primary" onClick={() => {}}>新增会员</Button>
       </div>
-      <Table dataSource={data} columns={columns} />
+      <Table dataSource={members} columns={columns} />
     </div>
   )
 }
