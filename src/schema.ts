@@ -6,10 +6,13 @@ export interface GymStore {
   address?: string;
 
   /** 经纬度 */
-  location?: [number, number];
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
 
-  /** 营业时间, 起始时间/终止时间（单位秒） */
-  businessTime: [number, number];
+  /** 营业时间 */
+  businessTime: string;
 
   /** 描述 */
   description?: string;
@@ -81,7 +84,7 @@ export interface GymStoreMember {
   phone: string;
 
   /** 会员等级 */
-  level: GymStoreMemberLevel;
+  level: string;
 
   /** 余额 */
   balance: number;

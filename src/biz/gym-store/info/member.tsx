@@ -6,11 +6,11 @@ import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { MenuOutlined } from '@ant-design/icons';
 import { CSS } from '@dnd-kit/utilities';
-import { useGymStoreDispatchContext, useGymStoreStateContext } from '../GymStoreContext';
+import { useCurrentGymStoreContext, useGymStoreDispatchContext } from '../GymStoreContext';
 import type { GymStoreMemberLevel } from '../../../schema';
 
-export function GymStoreMemberLevelSettings() {
-  const { currentGymStore } = useGymStoreStateContext();
+export function GymStoreMemberSettings() {
+  const currentGymStore = useCurrentGymStoreContext();
   const dispatch = useGymStoreDispatchContext();
 
   const data = currentGymStore.memberLevels;
@@ -29,10 +29,10 @@ export function GymStoreMemberLevelSettings() {
       title: '操作',
       key: 'action',
       render: (_, record) => (
-        <Space size='middle'>
-          <a onClick={() => { }}>编辑</a>
-          <a onClick={() => { console.log(record) }}>删除</a>
-        </Space>
+        <div>
+          <Button type="link" size="small" onClick={() => { }}>编辑</Button>
+          <Button type="link" size="small" onClick={() => { console.log(record) }}>删除</Button>
+        </div>
       )
     }
   ]
@@ -41,7 +41,7 @@ export function GymStoreMemberLevelSettings() {
     if (active.id === over?.id) return;
     const activeIndex = data.findIndex(i => i.id === active.id)
     const overIndex = data.findIndex(i => i.id === over?.id)
-    dispatch({type: 'move-member-levels-by-idx', payload: { from: activeIndex, to: overIndex }});
+    dispatch({ type: 'move-member-levels-by-idx', payload: { from: activeIndex, to: overIndex } });
   }
 
   return (
@@ -57,6 +57,7 @@ export function GymStoreMemberLevelSettings() {
         <SortableContext items={data} strategy={verticalListSortingStrategy}>
           <Table size='small'
             rowKey="id"
+            pagination={false}
             components={{
               body: {
                 row: Row,
@@ -94,7 +95,7 @@ function AddMemberLevelButton() {
     }
   };
 
-  const handleCancel = async () => {
+  const handleCancel = () => {
     setIsModalOpen(false)
   };
 

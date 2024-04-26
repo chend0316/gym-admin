@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { GymStoreInfo } from './info/GymStoreInfo'
+import { GymStoreInfoSettings } from './info'
 import { GymStoreMemberManagement } from './member/GymStoreMemberManagement'
 import { GymStoreCoachManagement } from './coach/GymStoreCoachManagement'
 import { GymStoreCourseManagement } from './course/GymStoreCourseManagement'
@@ -12,8 +12,8 @@ export function GymStoreManagement() {
   const tabItems: TabsProps['items'] = [
     {
       key: 'index',
-      label: <Link to="/gym-store/index">基本信息</Link>,
-      children: <GymStoreInfo />
+      label: <Link to="/gym-store/index">门店信息</Link>,
+      children: <GymStoreInfoSettings />
     },
     {
       key: 'member',

@@ -4,8 +4,12 @@ const gymStoreList: GymStore[] = [
   {
     id: "1",
     name: 'aa',
-    description: "上午8点至晚上10点营业。",
-    businessTime: [8 * 60 * 60, 22 * 60 * 60],
+    description: "这是一个健身房",
+    location: {
+      latitude: 39.916527,
+      longitude: 116.397128,
+    },
+    businessTime: "8:00~22:00",
     memberLevels: [
       {
         id: '1',
@@ -49,13 +53,30 @@ const gymStoreList: GymStore[] = [
         label: '4号场地',
       },
     ],
-    members: []
+    members: [
+      {
+        id: '1',
+        level: "2",
+        name: '张三',
+        nickname: '张三',
+        phone: '13800138000',
+        balance: 1000,
+      },
+      {
+        id: '2',
+        level: '1',
+        name: '李四',
+        nickname: '李四',
+        phone: '13800138001',
+        balance: 300,
+      },
+    ]
   },
   {
     id: "2",
     name: 'bb',
-    description: "上午8点至晚上10点营业。",
-    businessTime: [8 * 60 * 60, 22 * 60 * 60],
+    description: "这是一个健身房",
+    businessTime: "8:00~22:00",
     memberLevels: [
       {
         id: '1',

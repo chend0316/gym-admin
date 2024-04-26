@@ -12,6 +12,7 @@ interface GymSotreListProps {
  */
 export function GymStoreList({ }: GymSotreListProps) {
   const { gymStoreList: list, currentGymStoreId: activeId } = useGymStoreStateContext();
+  const dispatch = useGymStoreDispatchContext();
 
   return (
     <>
@@ -20,17 +21,17 @@ export function GymStoreList({ }: GymSotreListProps) {
         <Button type='primary' size="small" icon={<PlusOutlined />}></Button>
       </div>
       <div className=' divide-y'>
-        {list.map((item) => <GymStoreListItem key={item.id} value={item} active={item.id === activeId} />)}
+        {list.map((item) => <GymStoreListItem key={item.id} value={item} active={item.id === activeId} onClick={() => dispatch({ type: 'select-gym-store', payload: item.id })} />)}
       </div>
     </>
   )
 }
 
-function GymStoreListItem({ value, active }: { value: GymStore, active: boolean  }) {
+function GymStoreListItem({ value, active, onClick }: { value: GymStore, active: boolean, onClick: () => void }) {
   const dispatch = useGymStoreDispatchContext();
 
   const handleDelete = () => {
-    dispatch({type: 'delete-gym-store', payload: value.id})
+    dispatch({ type: 'delete-gym-store', payload: value.id })
   }
 
   const dropdownItems: MenuProps['items'] = [
@@ -40,7 +41,7 @@ function GymStoreListItem({ value, active }: { value: GymStore, active: boolean 
     }
   ];
 
-  return <div className='group h-10 flex flex-row items-center justify-between' onClick={() => {}}>
+  return <div className='group h-10 flex flex-row items-center justify-between hover:cursor-pointer' onClick={onClick}>
     <span className={cx({ ' text-blue-500': active })}>{value.name}</span>
     <Dropdown menu={{ items: dropdownItems }} placement='bottom'>
       <EllipsisOutlined className='invisible group-hover:visible cursor-pointer p-1' />

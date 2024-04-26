@@ -1,6 +1,8 @@
 import { Button, Input, Select, Space, Table, TableProps } from 'antd';
-import { useGymStoreDispatchContext, useGymStoreStateContext } from '../GymStoreContext';
+import { useCurrentGymStoreContext, useGymStoreDispatchContext } from '../GymStoreContext';
 import { GymStoreMember } from '../../../schema';
+import { useState } from 'react';
+import { GymStoreAddMemberButton } from './add-member-button';
 
 const columns: TableProps<GymStoreMember>['columns'] = [
   {
@@ -32,10 +34,10 @@ const columns: TableProps<GymStoreMember>['columns'] = [
     title: '操作',
     render: (_, member) => {
       return (
-        <Space>
-          <a>编辑</a>
-          <a>删除</a>
-        </Space >
+        <>
+          <Button type="link" size="small" onClick={() => { }}>编辑</Button>
+          <Button type="link" size="small" onClick={() => { console.log(member) }}>删除</Button>
+        </>
       );
     }
   }
@@ -45,35 +47,37 @@ const columns: TableProps<GymStoreMember>['columns'] = [
  * 会员管理
  */
 export function GymStoreMemberManagement() {
-  const { currentGymStore } = useGymStoreStateContext()
+  const currentGymStore = useCurrentGymStoreContext()
   const members = currentGymStore.members;
   const dispatch = useGymStoreDispatchContext();
 
   return (
     <div>
-      <div className=' flex flex-row justify-between'>
+      <div className=' flex flex-row justify-between mb-4'>
         <div>
-          <Space.Compact>
-            <Select style={{ width: '200px' }} defaultValue="id" options={[
-              {
-                label: '会员ID',
-                value: 'id',
-              },
-              {
-                label: '姓名',
-                value: 'name',
-              },
-              {
-                label: '手机号',
-                value: 'phone',
-              }
-            ]}>
-            </Select>
-            <Input placeholder="" />
-          </Space.Compact>
-          <Button onClick={() => { }}>搜索</Button>
+          <Space>
+            <Space.Compact>
+              <Select style={{ width: '200px' }} defaultValue="id" options={[
+                {
+                  label: '会员ID',
+                  value: 'id',
+                },
+                {
+                  label: '姓名',
+                  value: 'name',
+                },
+                {
+                  label: '手机号',
+                  value: 'phone',
+                }
+              ]}>
+              </Select>
+              <Input placeholder="" />
+            </Space.Compact>
+            <Button type="primary" onClick={() => { }}>搜索</Button>
+          </Space>
         </div>
-        <Button type="primary" onClick={() => {}}>新增会员</Button>
+        <GymStoreAddMemberButton />
       </div>
       <Table dataSource={members} columns={columns} />
     </div>
